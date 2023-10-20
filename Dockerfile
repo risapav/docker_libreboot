@@ -53,4 +53,10 @@ USER ${USERNAME}
 # Change workdir
 WORKDIR ${CB_PATH}/lbmk
 
+#RUN ./update trees -b coreboot utils && \
+#	./update trees -b seabios && \
+#	./update trees -b grub && \
+#	./update trees -b memtest86plus
+	
+
 #CMD ["/bin/bash"]
