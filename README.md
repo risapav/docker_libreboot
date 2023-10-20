@@ -1,6 +1,8 @@
 # docker_libreboot
 Generate alternative bios, LIBREBOOT
 
+https://libreboot.org/docs/install/ivy_has_common.uk.html
+
 ## Clone
 
 Make sure git is installed.
@@ -68,10 +70,10 @@ Once you have a backup of your vendor rom, you can use lbmk to automatically ext
 
 ```sh  
 # for x220_8mb
-./blobutil extract x220_8mb full_backup.bin
+./vendor extract x220_8mb full_backup.bin
 
 #for x230_12mb
-./blobutil extract x230_12mb full_backup.bin
+./vendor extract x230_12mb full_backup.bin
 ```
 
 Note that the above command must be run from the root of the lbmk directory. 
