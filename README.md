@@ -37,6 +37,7 @@ docker run \
   -v $PWD/project:/project \
   -v $PWD/tmp:/home/sdk/lbmk/tmp \
   -v $PWD/src:/home/sdk/lbmk/src \
+  -v $PWD/bin:/home/sdk/lbmk/bin \
   libreboot-sdk
 ```
 
@@ -45,22 +46,46 @@ docker run \
 For example, you can read both bios part from x230 motherboard. You will obtain bootom.rom and top.rom files. In general, the 4mb image is the top, and the 8mb image is the bottom. To create a readable rom file, simply concatenate the two files.
 
 ```sh  
+# for x220_8mb
+cat x220_8mb > full_backup.bin
+
+#for x230_12mb
 cat bottom.rom top.rom > full_backup.bin
 ```
 
-Within running container, copy full_backup.bin into /home/lboot/lbmk
+Inside running container, copy full_backup.bin into /home/lboot/lbmk
 
 ```sh 
+# for x220_8mb
 cp /project/x220/full_backup.bin /home/sdk/lbmk/
+
+#for x230_12mb
+cp /project/x230/full_backup.bin /home/sdk/lbmk/
 ```
 
 Once you have a backup of your vendor rom, you can use lbmk to automatically extract the necessary blobs. The blob extraction script takes a board name as the first argument and a path to a rom as the second argument. For example, here is how you would extract the blobs from an x230 rom backup.
 
 ```sh  
+# for x220_8mb
+./blobutil extract x220_8mb full_backup.bin
+
+#for x230_12mb
 ./blobutil extract x230_12mb full_backup.bin
 ```
 
 Note that the above command must be run from the root of the lbmk directory. 
+
+## Build libreboot ROM
+
+```sh 
+# for x220_8mb
+./build roms x220_8mb -p grub -d corebootfb -k usqwerty
+
+#for x230_12mb
+./build roms x230_12mb -p grub -d corebootfb -k usqwerty
+
+```
+
 
 ## Injecting Blobs into an Existing Rom
 
@@ -79,6 +104,7 @@ The script can automatically detect the board as long as you do not change the f
 Alternatively, you may patch only a single rom file. For example:
 
 ```sh 
+#for x230_12mb
 ./blobutil inject -r x230_libreboot.rom -b x230_12mb
 ```
 
