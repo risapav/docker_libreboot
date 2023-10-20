@@ -51,6 +51,7 @@ cat x220_8mb > full_backup.bin
 
 #for x230_12mb
 cat bottom.rom top.rom > full_backup.bin
+cat 8mb.rom 4mb.rom > full_backup.bin
 ```
 
 Inside running container, copy full_backup.bin into /home/lboot/lbmk
@@ -78,11 +79,19 @@ Note that the above command must be run from the root of the lbmk directory.
 ## Build libreboot ROM
 
 ```sh 
+# collect all possibilities to choose one
+./build roms list
+
 # for x220_8mb
 ./build roms x220_8mb -p grub -d corebootfb -k usqwerty
 
 #for x230_12mb
 ./build roms x230_12mb -p grub -d corebootfb -k usqwerty
+
+#    decompose to parts
+
+dd if=coreboot.rom of=coreboot-8mb.rom bs=1M count=8 
+dd if=coreboot.rom of=coreboot-4mb.rom bs=1M skip=8
 
 ```
 
@@ -96,7 +105,15 @@ In order to inject the necessary blobs into a rom image, run the script from the
 If you only wish to flash a release rom then the process of injecting the necessary blobs is quite simple. Run the injection script pointing to the release archive you downloaded:
 
 ```sh 
-./blobutil inject /path/to/libreboot-20230319-18-g9f76c92_t440pmrc_12mb.tar.xz
+./vendor inject /path/to/libreboot-20230319-18-g9f76c92_t440pmrc_12mb.tar.xz
+
+# for x220_8mb to patch single ROM file
+./vendor inject x220_libreboot.rom
+
+./vendor inject -r x220_libreboot.rom -b x220_8mb
+
+# to update MAC address
+./vendor inject -r x220_libreboot.rom -b x220_8mb -m 00:f6:f0:40:71:fd
 ```
 
 The script can automatically detect the board as long as you do not change the file name. You can then find flash-ready ROMs in /bin/release/
@@ -105,14 +122,44 @@ Alternatively, you may patch only a single rom file. For example:
 
 ```sh 
 #for x230_12mb
-./blobutil inject -r x230_libreboot.rom -b x230_12mb
+./vendor inject -r x230_libreboot.rom -b x230_12mb
 ```
 
 Optionally, you can use this script to modify the mac address of the rom with the -m flag. For example:
 
 ```sh 
-./blobutil inject -r x230_libreboot.rom -b x230_12mb -m 00:f6:f0:40:71:fd
+./vendor inject -r x230_libreboot.rom -b x230_12mb -m 00:f6:f0:40:71:fd
 ```
+## Check that the files were inserted
+
+You must ensure that the files were inserted.
+
+Some examples of how to do that in lbmk:
+```sh 
+./update trees -b coreboot utils
+```
+
+Now you find cbutitls/default, which is a directory containing cbfstool and ifdtool. Do this on your ROM image (libreboot.rom in the example below):
+```sh 
+./cbutils/default/cbfstool libreboot.rom print
+```
+
+You should check that the files were inserted in cbfs, if needed; for example, EC firmware or MRC firmware.
+
+Next:
+
+```sh 
+./cbutils/default/ifdtool -x libreboot.rom
+```
+
+This creates several .bin files, one of which says me in it (Intel ME). Run hexdump on it:
+
+hexdump flashregion_2_intel_me.bin
+
+Check the output. If it’s all 0xFF (all ones) or otherwise isn’t a bunch of code, then the Intel ME firmware wasn’t inserted.
+
+You’ll note the small size of the Intel ME, e.g. 84KB on sandybridge platforms. This is because lbmk automatically neuters it, disabling it during early boot. This is done using me_cleaner, which lbmk imports.
+
 
 ## Splitting The rom
 
