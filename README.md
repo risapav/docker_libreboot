@@ -34,7 +34,9 @@ docker run \
   -it \
   --user "$(id -u):$(id -g)" \
   --entrypoint /bin/bash \
-  -v $PWD:/project \
+  -v $PWD/project:/project \
+  -v $PWD/tmp:/home/sdk/lbmk/tmp \
+  -v $PWD/src:/home/sdk/lbmk/src \
   libreboot-sdk
 ```
 
@@ -44,6 +46,12 @@ For example, you can read both bios part from x230 motherboard. You will obtain 
 
 ```sh  
 cat bottom.rom top.rom > full_backup.bin
+```
+
+Within running container, copy full_backup.bin into /home/lboot/lbmk
+
+```sh 
+cp /project/x220/full_backup.bin /home/lboot/lbmk/
 ```
 
 Once you have a backup of your vendor rom, you can use lbmk to automatically extract the necessary blobs. The blob extraction script takes a board name as the first argument and a path to a rom as the second argument. For example, here is how you would extract the blobs from an x230 rom backup.

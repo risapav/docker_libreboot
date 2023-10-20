@@ -1,7 +1,7 @@
 FROM debian:stable-slim
 
 # Prepare directory for tools
-ARG USERNAME=lboot
+ARG USERNAME=sdk
 ARG CB_PATH=/home/${USERNAME}
 
 
