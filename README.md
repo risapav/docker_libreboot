@@ -51,7 +51,7 @@ cat bottom.rom top.rom > full_backup.bin
 Within running container, copy full_backup.bin into /home/lboot/lbmk
 
 ```sh 
-cp /project/x220/full_backup.bin /home/lboot/lbmk/
+cp /project/x220/full_backup.bin /home/sdk/lbmk/
 ```
 
 Once you have a backup of your vendor rom, you can use lbmk to automatically extract the necessary blobs. The blob extraction script takes a board name as the first argument and a path to a rom as the second argument. For example, here is how you would extract the blobs from an x230 rom backup.
