@@ -134,6 +134,8 @@ Note that the above command must be run from the root of the lbmk directory.
 dd if=coreboot.rom of=coreboot-8mb.rom bs=1M count=8 
 dd if=coreboot.rom of=coreboot-4mb.rom bs=1M skip=8
 
+# for t420_8mb
+./build roms t420_8mb -p grub -d corebootfb -k usqwerty
 ```
 
 
@@ -162,6 +164,10 @@ If you only wish to flash a release rom then the process of injecting the necess
 
 # for x230_12mb to patch single ROM file
 ./vendor inject -r bin/x230_12mb/grub_x230_12mb_libgfxinit_corebootfb_usqwerty.rom -b x220_8mb -m 3c:97:0e:3c:7d:a3
+
+# for t420_8mb to patch single ROM file
+./vendor inject -r bin/t420_8mb/grub_t420_8mb_libgfxinit_corebootfb_usqwerty.rom -b t420_8mb
+./vendor inject -r bin/t420_8mb/grub_t420_8mb_libgfxinit_corebootfb_usqwerty.rom -b t420_8mb -m 00:21:cc:c0:4e:37
 ```
 
 The script can automatically detect the board as long as you do not change the file name. You can then find flash-ready ROMs in /bin/release/
