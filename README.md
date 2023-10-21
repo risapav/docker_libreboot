@@ -15,8 +15,9 @@ git clone git@github.com:risapav/docker_libreboot.git && cd docker_libreboot
 
 https://daduke.org/hardware/x220-fhd/
 
-Locate gma-mainboard.ads file inside src/coreboot/default/src/mainboard/lenovo/x220
-Edit file
+First locate gma-mainboard.ads file inside src/coreboot/default/src/mainboard/lenovo/x220
+
+Then Edit file and delete line "LVDS"
 
 ```sh
 
