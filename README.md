@@ -10,6 +10,43 @@ Make sure git is installed.
 git clone git@github.com:risapav/docker_libreboot.git && cd docker_libreboot
 ```
 
+
+## Thinkpad X220 FullHD mod with LVDS 
+
+https://daduke.org/hardware/x220-fhd/
+
+Locate gma-mainboard.ads file inside src/coreboot/default/src/mainboard/lenovo/x220
+Edit file
+
+```sh
+
+gma-mainboard.ads 
+
+-- SPDX-License-Identifier: GPL-2.0-or-later
+
+with HW.GFX.GMA;
+with HW.GFX.GMA.Display_Probing;
+
+use HW.GFX.GMA;
+use HW.GFX.GMA.Display_Probing;
+
+private package GMA.Mainboard is
+
+  ports : constant Port_List :=
+    (DP1,
+     DP2,
+     DP3,
+     HDMI1,
+     HDMI2,
+     HDMI3,
+     Analog,
+     LVDS,  <----------- delete this line 
+     others => Disabled);
+
+end GMA.Mainboard;
+```
+
+
 ## Build
 
 Prepare Docker environment, Docker should be installed and running.
@@ -78,6 +115,7 @@ Once you have a backup of your vendor rom, you can use lbmk to automatically ext
 
 Note that the above command must be run from the root of the lbmk directory. 
 
+
 ## Build libreboot ROM
 
 ```sh 
@@ -116,6 +154,13 @@ If you only wish to flash a release rom then the process of injecting the necess
 
 # to update MAC address
 ./vendor inject -r x220_libreboot.rom -b x220_8mb -m 00:f6:f0:40:71:fd
+
+
+./vendor inject -r bin/x220_8mb/grub_x220_8mb_libgfxinit_corebootfb_usqwerty.rom -b x220_8mb
+./vendor inject -r bin/x220_8mb/grub_x220_8mb_libgfxinit_corebootfb_usqwerty.rom -b x220_8mb -m 00:f6:f0:40:71:fd
+
+# for x230_12mb to patch single ROM file
+./vendor inject -r bin/x230_12mb/grub_x230_12mb_libgfxinit_corebootfb_usqwerty.rom -b x220_8mb -m 3c:97:0e:3c:7d:a3
 ```
 
 The script can automatically detect the board as long as you do not change the file name. You can then find flash-ready ROMs in /bin/release/
@@ -132,6 +177,8 @@ Optionally, you can use this script to modify the mac address of the rom with th
 ```sh 
 ./vendor inject -r x230_libreboot.rom -b x230_12mb -m 00:f6:f0:40:71:fd
 ```
+
+
 ## Check that the files were inserted
 
 You must ensure that the files were inserted.
@@ -170,6 +217,12 @@ You can use dd to easily split your rom into the two separate portions for exter
 ```sh 
 dd if=libreboot.rom of=top.rom bs=1M skip=8
 dd if=libreboot.rom of=bottom.rom bs=1M count=8
+
+#for x230_12mb
+dd if=grub_x230_12mb_libgfxinit_corebootfb_usqwerty.rom of=top.rom bs=1M skip=8
+dd if=grub_x230_12mb_libgfxinit_corebootfb_usqwerty.rom of=bottom.rom bs=1M count=8
+
+
 ```
 
 You would then flash the 4MiB chip with top.rom and the 8MiB chip with bottom.rom. For a larger rom image, the same logic would apply.
