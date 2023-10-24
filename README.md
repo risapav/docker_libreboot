@@ -123,6 +123,9 @@ Note that the above command must be run from the root of the lbmk directory.
 # collect all possibilities to choose one
 ./build roms list
 
+# for x200_8mb
+./build roms x200_8mb -p grub -d corebootfb -k usqwerty
+
 # for x220_8mb
 ./build roms x220_8mb -p grub -d corebootfb -k usqwerty
 
@@ -149,6 +152,10 @@ If you only wish to flash a release rom then the process of injecting the necess
 
 ```sh 
 ./vendor inject /path/to/libreboot-20230319-18-g9f76c92_t440pmrc_12mb.tar.xz
+
+# to update MAC address x200_8mb
+./vendor inject -r bin/x200_8mb/grub_x200_8mb_libgfxinit_corebootfb_usqwerty_noblobs.rom -b x200_8mb -m 00:1f:16:38:40:18
+
 
 # for x220_8mb to patch single ROM file
 ./vendor inject x220_libreboot.rom
