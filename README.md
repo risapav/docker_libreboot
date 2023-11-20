@@ -47,8 +47,102 @@ private package GMA.Mainboard is
 end GMA.Mainboard;
 ```
 
+## Prepare QEMU emulator
 
-## Build
+```sh
+sudo apt install qemu-system-x86
+
+qemu-system-x86_64 -bios bin/qemu_x86_12mb/grub_qemu_x86_12mb_libgfxinit_corebootfb_usqwerty_noblobs.rom
+
+```
+
+## Builds payloadds
+
+If you wish to build payloads, you can also do that. For example:
+
+./build payload grub
+
+./build payload seabios
+
+Second, download all of the required software components
+
+If you didn’t simply run ./build boot roms (with or without extra arguments), you can still perform the rest of the build process manually. Read on! You can read about all available scripts in lbmk by reading the Libreboot maintenance manual; lbmk is designed to be modular which means that each script can be used on its own (if that’s not true, for any script, it’s a bug that should be fixed).
+
+It’s as simple as that:
+
+./download all
+
+The above command downloads all modules defined in the Libreboot build system. However, you can download modules individually.
+
+This command shows you the list of available modules:
+
+./download list
+
+Example of downloading an individual module:
+
+./download coreboot
+
+./download seabios
+
+./download grub
+
+./download flashrom
+
+Third, build all of the modules:
+
+Building a module means that it needs to have already been downloaded. Currently, the build system does not automatically do pre-requisite steps such as this, so you must verify this yourself.
+
+Again, very simple:
+
+./build module all
+
+This builds every module defined in the Libreboot build system, but you can build modules individually.
+
+The following command lists available modules:
+
+./build module list
+
+Example of building specific modules:
+
+./build module grub
+
+./build module seabios
+
+./build module flashrom
+
+Commands are available to clean a module, which basically runs make-clean. You can list these commands:
+
+./build clean list
+
+Clean all modules like so:
+
+./build clean all
+
+Example of cleaning specific modules:
+
+./build clean grub
+
+./build clean cbutils
+
+Fourth, build all of the payloads:
+
+Very straight forward:
+
+./build payload all
+
+You can list available payloads like so:
+
+./build payload list
+
+Example of building specific payloads:
+
+./build payload grub
+
+./build payload seabios
+
+The build-payload command is is a prerequsite for building ROM images.
+
+## Build libreboot
 
 Prepare Docker environment, Docker should be installed and running.
 
@@ -129,6 +223,9 @@ Note that the above command must be run from the root of the lbmk directory.
 ```sh 
 # collect all possibilities to choose one
 ./build roms list
+
+# for qemu_x86_12mb
+./build roms qemu_x86_12mb -p grub -d corebootfb -k usqwerty
 
 # for x200_8mb
 ./build roms x200_8mb -p grub -d corebootfb -k usqwerty
