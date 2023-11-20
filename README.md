@@ -53,6 +53,14 @@ end GMA.Mainboard;
 Prepare Docker environment, Docker should be installed and running.
 
 ```sh
+mkdir ~/.docker
+sudo groupadd docker
+sudo usermod -aG docker ${USER}
+su -s ${USER}
+sudo chown "$USER":"$USER" ~/.docker -R
+sudo chmod g+rwx "~/.docker" -R
+sudo chmod 666 /var/run/docker.sock
+
 # building pure sshd resvice with root access sourced from github
 docker build https://github.com/risapav/docker_libreboot.git -t libreboot-sdk 
 
@@ -60,7 +68,6 @@ docker build https://github.com/risapav/docker_libreboot.git -t libreboot-sdk
 docker build -t libreboot-sdk .
 
 # or
-
 docker build risapav/docker_libreboot -t libreboot-sdk 
 ```
 
