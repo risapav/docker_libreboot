@@ -1,3 +1,7 @@
 src/*
 tmp/*
 bin/*
+
+*.rom
+*.bin
+
