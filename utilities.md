@@ -1,3 +1,5 @@
+# Required utilities
+
 ## Git
 
 ## Docker
@@ -74,9 +76,9 @@ sudo systemctl enable containerd.service
 ## QEMU emulator
 
 QEMU is a generic and open source machine emulator and virtualizer.
-https://wiki.qemu.org/Main_Page
-https://www.qemu.org/
-https://www.tecmint.com/install-qemu-kvm-ubuntu-create-virtual-machines/
+- https://wiki.qemu.org/Main_Page
+- https://www.qemu.org/
+- https://www.tecmint.com/install-qemu-kvm-ubuntu-create-virtual-machines/
 
 This is a very useful tool when debugging Coreboot and LibreBoot. The finished product can be launched and tested virtually.
 
@@ -109,12 +111,12 @@ sudo apt install qemu-kvm virt-manager virtinst libvirt-clients bridge-utils lib
 
 Let us examine what role each of these packages plays.
 
-qemu-kvm – This is an open-source emulator that emulates the hardware resources of a computer.
-virt-manager – A Qt-based GUI interface for creating and managing virtual machines using the libvirt daemon.
-virtinst – A collection of command-line utilities for creating and making changes to virtual machines.
-libvirt-clients – APIs and client-side libraries for managing virtual machines from the command line.
-bridge-utils – A set of command-line tools for managing bridge devices.
-libvirt-daemon-system – Provides configuration files needed to run the virtualization service.
+- qemu-kvm – This is an open-source emulator that emulates the hardware resources of a computer.
+- virt-manager – A Qt-based GUI interface for creating and managing virtual machines using the libvirt daemon.
+- virtinst – A collection of command-line utilities for creating and making changes to virtual machines.
+- libvirt-clients – APIs and client-side libraries for managing virtual machines from the command line.
+- bridge-utils – A set of command-line tools for managing bridge devices.
+- libvirt-daemon-system – Provides configuration files needed to run the virtualization service.
 
 At this point, we have installed QEMU and all the essential virtualization packages. T
 
@@ -125,13 +127,13 @@ sudo systemctl enable --now libvirtd
 sudo systemctl start libvirtd
 ```
 
-***4. Verify if the virtualization service is running as shown.***
+***4. Verify if the virtualization service is running.***
 
 ```sh
 sudo systemctl status libvirtd
 ```
 
-***5. Add the currently logged-in user to the kvm and libvirt groups as shown.***
+***5. Add the currently logged-in user to the kvm and libvirt groups.***
 
 ```sh
 sudo usermod -aG kvm $USER
