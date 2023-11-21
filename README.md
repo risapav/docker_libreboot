@@ -20,6 +20,9 @@ Make sure git is installed.
 
 ```sh
 git clone git@github.com:risapav/docker_libreboot.git && cd docker_libreboot
+
+
+git clone https://github.com/risapav/docker_libreboot.git && cd docker_libreboot
 ```
 
 ## Build libreboot docker environment
