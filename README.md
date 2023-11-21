@@ -2,6 +2,97 @@
 Generate alternative bios, LIBREBOOT
 
 https://libreboot.org/docs/install/ivy_has_common.uk.html
+https://libreboot.org/docs/maintain/
+
+
+## Brief Introduction
+
+In order for everything to work properly, it is necessary to familiarize yourself with the information 
+from the page https://libreboot.org/docs/maintain/
+and have the necessary Git and Docker utilities ready. The system I use is Ubuntu.
+
+### Git
+
+### Docker
+
+You can find information about installing Docker on the site
+https://docs.docker.com/engine/install/ubuntu/
+
+1. Run the following command to uninstall all conflicting packages
+
+```sh
+for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do sudo apt-get remove $pkg; done
+```
+
+2. Install using the apt repository
+
+```sh
+# Add Docker's official GPG key:
+sudo apt-get update
+sudo apt-get install ca-certificates curl gnupg
+sudo install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+sudo chmod a+r /etc/apt/keyrings/docker.gpg
+
+# Add the repository to Apt sources:
+echo \
+  "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get update
+```
+
+3. Install the Docker packages
+
+```sh
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+```
+
+4. Verify that the Docker Engine installation is successful by running the hello-world image.
+
+```sh
+sudo docker run hello-world
+```
+
+5. Manage Docker as a non-root user
+
+You can find information about linux post-installing on the site
+https://docs.docker.com/engine/install/linux-postinstall/
+
+```sh
+# Create the docker group
+sudo groupadd docker
+
+# Add your user to the docker group.
+sudo usermod -aG docker $USER
+newgrp docker
+
+# Verify that you can run docker commands without sudo.
+docker run hello-world
+
+# Correct permissions
+mkdir ~/.docker
+sudo chown "$USER":"$USER" /home/"$USER"/.docker -R
+sudo chmod g+rwx "$HOME/.docker" -R
+```
+
+6. Configure Docker to start on boot with systemd
+
+```sh
+# Configure Docker to start on boot with systemd
+sudo systemctl enable docker.service
+sudo systemctl enable containerd.service
+```
+
+### QEMU emulator
+
+```sh
+# install QEMU emulator
+sudo apt install qemu-system-x86
+
+qemu-system-x86_64 -bios bin/qemu_x86_12mb/grub_qemu_x86_12mb_libgfxinit_corebootfb_usqwerty_noblobs.rom
+
+```
 
 ## Clone
 
@@ -49,12 +140,7 @@ end GMA.Mainboard;
 
 ## Prepare QEMU emulator
 
-```sh
-sudo apt install qemu-system-x86
 
-qemu-system-x86_64 -bios bin/qemu_x86_12mb/grub_qemu_x86_12mb_libgfxinit_corebootfb_usqwerty_noblobs.rom
-
-```
 
 ## Builds payloadds
 
@@ -147,13 +233,7 @@ The build-payload command is is a prerequsite for building ROM images.
 Prepare Docker environment, Docker should be installed and running.
 
 ```sh
-mkdir ~/.docker
-sudo groupadd docker
-sudo usermod -aG docker ${USER}
-su -s ${USER}
-sudo chown "$USER":"$USER" ~/.docker -R
-sudo chmod g+rwx "~/.docker" -R
-sudo chmod 666 /var/run/docker.sock
+
 
 # building pure sshd resvice with root access sourced from github
 docker build https://github.com/risapav/docker_libreboot.git -t libreboot-sdk 
