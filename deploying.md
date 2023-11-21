@@ -1,11 +1,11 @@
 ---
-# Content
-[Original bios extraction](#original-bios-extraction)
-[Splitting The rom](#splitting-the-rom)
-[Thinkpad X220 FullHD mod with LVDS](#thinkpad-x220-fullhd-mod-with-lvds)
-[Build libreboot ROM](#build-libreboot-rom)
-[Injecting Blobs into an Existing Rom](#injecting-blobs-into-an-existing-rom)
-[Check that the files were inserted](#check-that-the-files-were-inserted)
+## Content
+- [Original bios extraction](#original-bios-extraction)
+- [Splitting The rom](#splitting-the-rom)
+- [Thinkpad X220 FullHD mod with LVDS](#thinkpad-x220-fullhd-mod-with-lvds)
+- [Build libreboot ROM](#build-libreboot-rom)
+- [Injecting Blobs into an Existing Rom](#injecting-blobs-into-an-existing-rom)
+- [Check that the files were inserted](#check-that-the-files-were-inserted)
 ---
 ## Original bios extraction
 
