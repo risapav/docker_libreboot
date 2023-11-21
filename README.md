@@ -14,14 +14,6 @@ and have the necessary Git and Docker utilities ready. The system I use is Ubunt
 
 [How to prepare utilities](utilities.md)
 
-```sh
-# install QEMU emulator
-sudo apt install qemu-system-x86
-
-qemu-system-x86_64 -bios bin/qemu_x86_12mb/grub_qemu_x86_12mb_libgfxinit_corebootfb_usqwerty_noblobs.rom
-
-```
-
 ## Clone repository to local PC
 
 Make sure git is installed.
