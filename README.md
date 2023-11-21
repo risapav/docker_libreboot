@@ -11,6 +11,8 @@ In order for everything to work properly, it is necessary to familiarize yoursel
 from the page https://libreboot.org/docs/maintain/
 and have the necessary Git and Docker utilities ready. The system I use is Ubuntu.
 
+[Prepare utilities](utilities.md)
+
 ### Git
 
 ### Docker
