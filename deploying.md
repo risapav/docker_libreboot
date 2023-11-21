@@ -122,7 +122,6 @@ Run the build script inside lbmk.
 ./build roms x230_12mb -p grub -d corebootfb -k usqwerty
 
 #    decompose to parts
-
 dd if=coreboot.rom of=coreboot-8mb.rom bs=1M count=8 
 dd if=coreboot.rom of=coreboot-4mb.rom bs=1M skip=8
 
@@ -144,7 +143,6 @@ If you only wish to flash a release rom then the process of injecting the necess
 # to update MAC address x200_8mb
 ./vendor inject -r bin/x200_8mb/grub_x200_8mb_libgfxinit_corebootfb_usqwerty_noblobs.rom -b x200_8mb -m 00:1f:16:38:40:18
 
-
 # for x220_8mb to patch single ROM file
 ./vendor inject x220_libreboot.rom
 
@@ -152,7 +150,6 @@ If you only wish to flash a release rom then the process of injecting the necess
 
 # to update MAC address
 ./vendor inject -r x220_libreboot.rom -b x220_8mb -m 00:f6:f0:40:71:fd
-
 
 ./vendor inject -r bin/x220_8mb/grub_x220_8mb_libgfxinit_corebootfb_usqwerty.rom -b x220_8mb
 ./vendor inject -r bin/x220_8mb/grub_x220_8mb_libgfxinit_corebootfb_usqwerty.rom -b x220_8mb -m 00:f6:f0:40:71:fd
