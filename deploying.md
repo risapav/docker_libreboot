@@ -46,6 +46,7 @@ Once you have a backup of your vendor rom, you can use lbmk to automatically ext
 
 Note that the above command must be run from the root of the lbmk directory. 
 
+---
 
 ## Splitting The rom
 
@@ -65,6 +66,8 @@ You would then flash the 4MiB chip with top.rom and the 8MiB chip with bottom.ro
 In dd skip means that you want the program to ignore the first n blocks, whereas count means you want it to stop writing after n blocks.
 
 Once you have your rom image split you can proceed to flashing.
+
+---
 
 ## Thinkpad X220 FullHD mod with LVDS 
 - https://daduke.org/hardware/x220-fhd/
@@ -101,6 +104,8 @@ private package GMA.Mainboard is
 end GMA.Mainboard;
 ```
 
+---
+
 ## Build libreboot ROM
 
 Run the build script inside lbmk.
@@ -128,6 +133,8 @@ dd if=coreboot.rom of=coreboot-4mb.rom bs=1M skip=8
 # for t420_8mb
 ./build roms t420_8mb -p grub -d corebootfb -k usqwerty
 ```
+
+---
 
 ## Injecting Blobs into an Existing Rom
 
@@ -177,6 +184,7 @@ Optionally, you can use this script to modify the mac address of the rom with th
 ./vendor inject -r x230_libreboot.rom -b x230_12mb -m 00:f6:f0:40:71:fd
 ```
 
+---
 
 ## Check that the files were inserted
 
@@ -208,7 +216,7 @@ Check the output. If it’s all 0xFF (all ones) or otherwise isn’t a bunch of 
 
 You’ll note the small size of the Intel ME, e.g. 84KB on sandybridge platforms. This is because lbmk automatically neuters it, disabling it during early boot. This is done using me_cleaner, which lbmk imports.
 
-
+---
 
 ## Prepare QEMU emulator
 
@@ -299,15 +307,6 @@ Example of building specific payloads:
 ./build payload seabios
 
 The build-payload command is is a prerequsite for building ROM images.
-
-
-
-
-
-
-
-
-
 
 
 
