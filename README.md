@@ -1,6 +1,5 @@
 # docker_libreboot
 Generate alternative bios, LIBREBOOT
-
 - https://libreboot.org/docs/install/ivy_has_common.uk.html
 - https://libreboot.org/docs/maintain/
 
@@ -10,10 +9,10 @@ Generate alternative bios, LIBREBOOT
 In order for everything to work properly, it is necessary to familiarize yourself with the information 
 from the page 
 - https://libreboot.org/docs/maintain/
+
 and have the necessary Git and Docker utilities ready. The system I use is Ubuntu.
 
-[Prepare utilities](utilities.md)
-
+[How to prepare utilities](utilities.md)
 
 ```sh
 # install QEMU emulator
@@ -32,7 +31,6 @@ git clone git@github.com:risapav/docker_libreboot.git && cd docker_libreboot
 
 
 ## Thinkpad X220 FullHD mod with LVDS 
-
 - https://daduke.org/hardware/x220-fhd/
 
 First locate gma-mainboard.ads file inside src/coreboot/default/src/mainboard/lenovo/x220
