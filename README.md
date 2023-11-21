@@ -5,7 +5,7 @@ https://libreboot.org/docs/install/ivy_has_common.uk.html
 https://libreboot.org/docs/maintain/
 
 
-## Brief Introduction
+## Brief Introductions
 
 In order for everything to work properly, it is necessary to familiarize yourself with the information 
 from the page https://libreboot.org/docs/maintain/
@@ -85,6 +85,71 @@ sudo systemctl enable containerd.service
 ```
 
 ### QEMU emulator
+
+QEMU is a generic and open source machine emulator and virtualizer.
+https://wiki.qemu.org/Main_Page
+https://www.qemu.org/
+https://www.tecmint.com/install-qemu-kvm-ubuntu-create-virtual-machines/
+
+This is a very useful tool when debugging Coreboot and LibreBoot. The finished product can be launched and tested virtually.
+
+1. Check Virtualization Enabled in Ubuntu
+
+To start off check if your CPU supports virtualization technology. Your system needs to have an Intel VT-x (vmx) processor or AMD-V (svm) processor.
+To verify this, run the following egrep command.
+
+```sh
+$ egrep -c '(vmx|svm)' /proc/cpuinfo
+```
+
+If Virtualization is supported, the output should be greater than 0, for example, 2,4,6, etc.
+Alternatively, you can run the following grep command to display the type of processor your system supports. In our case, we are running Intel VT-x denoted by the vmx parameter.
+
+```sh
+$ grep -E --color '(vmx|svm)' /proc/cpuinfo
+```
+
+2. Install QEMU/KVM on Ubuntu 20.04/22.04
+
+Next up, update the package lists and repositories as follows.
+```sh
+sudo apt update
+```
+Thereafter, install QEMU/KVM alongside other virtualization packages as follows:
+```sh
+sudo apt install qemu-kvm virt-manager virtinst libvirt-clients bridge-utils libvirt-daemon-system -y
+```
+
+Let us examine what role each of these packages plays.
+
+qemu-kvm – This is an open-source emulator that emulates the hardware resources of a computer.
+virt-manager – A Qt-based GUI interface for creating and managing virtual machines using the libvirt daemon.
+virtinst – A collection of command-line utilities for creating and making changes to virtual machines.
+libvirt-clients – APIs and client-side libraries for managing virtual machines from the command line.
+bridge-utils – A set of command-line tools for managing bridge devices.
+libvirt-daemon-system – Provides configuration files needed to run the virtualization service.
+
+At this point, we have installed QEMU and all the essential virtualization packages. T
+
+3. Start and enable the libvirtd virtualization daemon.
+
+```sh
+sudo systemctl enable --now libvirtd
+sudo systemctl start libvirtd
+```
+
+4. Verify if the virtualization service is running as shown.
+
+```sh
+sudo systemctl status libvirtd
+```
+
+5. Add the currently logged-in user to the kvm and libvirt groups as shown.
+
+```sh
+sudo usermod -aG kvm $USER
+sudo usermod -aG libvirt $USER
+```
 
 ```sh
 # install QEMU emulator
