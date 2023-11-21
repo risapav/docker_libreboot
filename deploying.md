@@ -10,6 +10,7 @@ Deploying.md
 - [Build libreboot ROM](#build-libreboot-rom)
 - [Injecting Blobs into an Existing Rom](#injecting-blobs-into-an-existing-rom)
 - [Check that the files were inserted](#check-that-the-files-were-inserted)
+- [Prepare QEMU emulator](#prepare-qemu-emulator)
 ---
 ## Original bios extraction
 
@@ -220,6 +221,13 @@ You’ll note the small size of the Intel ME, e.g. 84KB on sandybridge platforms
 
 ## Prepare QEMU emulator
 
+```sh 
+# buil for qemu_x86_12mb
+./build roms qemu_x86_12mb -p grub -d corebootfb -k usqwerty
+
+qemu-system-x86_64 -bios bin/qemu_x86_12mb/grub_qemu_x86_12mb_libgfxinit_corebootfb_usqwerty_noblobs.rom
+
+```
 
 
 ## Builds payloadds
