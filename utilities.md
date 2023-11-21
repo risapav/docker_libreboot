@@ -5,7 +5,7 @@
 ## Docker
 
 You can find information about installing Docker on the site
-https://docs.docker.com/engine/install/ubuntu/
+- https://docs.docker.com/engine/install/ubuntu/
 
 ***1. Run the following command to uninstall all conflicting packages***
 
@@ -46,7 +46,7 @@ sudo docker run hello-world
 ***5. Manage Docker as a non-root user***
 
 You can find information about linux post-installing on the site
-https://docs.docker.com/engine/install/linux-postinstall/
+- https://docs.docker.com/engine/install/linux-postinstall/
 
 ```sh
 # Create the docker group
@@ -72,6 +72,32 @@ sudo chmod g+rwx "$HOME/.docker" -R
 sudo systemctl enable docker.service
 sudo systemctl enable containerd.service
 ```
+
+### To stop this behavior, use disable instead.
+
+```sh
+sudo systemctl disable docker.service
+sudo systemctl disable containerd.service
+```
+
+### Uninstall Docker Engine
+
+Uninstall the Docker Engine, CLI, containerd, and Docker Compose packages:
+
+```sh
+sudo apt-get purge docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin docker-ce-rootless-extras
+```
+
+Images, containers, volumes, or custom configuration files on your host aren't automatically removed. To delete all images, containers, and volumes:
+
+```sh
+sudo rm -rf /var/lib/docker
+sudo rm -rf /var/lib/containerd
+``` 
+You have to delete any edited configuration files manually.
+
+
+
 
 ## QEMU emulator
 
