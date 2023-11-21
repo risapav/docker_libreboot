@@ -18,13 +18,13 @@ and have the necessary Git and Docker utilities ready. The system I use is Ubunt
 You can find information about installing Docker on the site
 https://docs.docker.com/engine/install/ubuntu/
 
-1. Run the following command to uninstall all conflicting packages
+***1. Run the following command to uninstall all conflicting packages***
 
 ```sh
 for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do sudo apt-get remove $pkg; done
 ```
 
-2. Install using the apt repository
+***2. Install using the apt repository***
 
 ```sh
 # Add Docker's official GPG key:
@@ -42,19 +42,19 @@ echo \
 sudo apt-get update
 ```
 
-3. Install the Docker packages
+***3. Install the Docker packages***
 
 ```sh
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 ```
 
-4. Verify that the Docker Engine installation is successful by running the hello-world image.
+***4. Verify that the Docker Engine installation is successful by running the hello-world image***
 
 ```sh
 sudo docker run hello-world
 ```
 
-5. Manage Docker as a non-root user
+***5. Manage Docker as a non-root user***
 
 You can find information about linux post-installing on the site
 https://docs.docker.com/engine/install/linux-postinstall/
@@ -76,7 +76,7 @@ sudo chown "$USER":"$USER" /home/"$USER"/.docker -R
 sudo chmod g+rwx "$HOME/.docker" -R
 ```
 
-6. Configure Docker to start on boot with systemd
+***6. Configure Docker to start on boot with systemd***
 
 ```sh
 # Configure Docker to start on boot with systemd
@@ -93,7 +93,7 @@ https://www.tecmint.com/install-qemu-kvm-ubuntu-create-virtual-machines/
 
 This is a very useful tool when debugging Coreboot and LibreBoot. The finished product can be launched and tested virtually.
 
-1. Check Virtualization Enabled in Ubuntu
+***1. Check Virtualization Enabled in Ubuntu***
 
 To start off check if your CPU supports virtualization technology. Your system needs to have an Intel VT-x (vmx) processor or AMD-V (svm) processor.
 To verify this, run the following egrep command.
@@ -109,7 +109,7 @@ Alternatively, you can run the following grep command to display the type of pro
 $ grep -E --color '(vmx|svm)' /proc/cpuinfo
 ```
 
-2. Install QEMU/KVM on Ubuntu 20.04/22.04
+***2. Install QEMU/KVM on Ubuntu 20.04/22.04***
 
 Next up, update the package lists and repositories as follows.
 ```sh
@@ -131,20 +131,20 @@ libvirt-daemon-system – Provides configuration files needed to run the virtual
 
 At this point, we have installed QEMU and all the essential virtualization packages. T
 
-3. Start and enable the libvirtd virtualization daemon.
+***3. Start and enable the libvirtd virtualization daemon.***
 
 ```sh
 sudo systemctl enable --now libvirtd
 sudo systemctl start libvirtd
 ```
 
-4. Verify if the virtualization service is running as shown.
+***4. Verify if the virtualization service is running as shown.***
 
 ```sh
 sudo systemctl status libvirtd
 ```
 
-5. Add the currently logged-in user to the kvm and libvirt groups as shown.
+***5. Add the currently logged-in user to the kvm and libvirt groups as shown.***
 
 ```sh
 sudo usermod -aG kvm $USER
