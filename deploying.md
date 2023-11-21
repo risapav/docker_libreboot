@@ -109,7 +109,7 @@ end GMA.Mainboard;
 
 ## Build libreboot ROM
 
-Run the build script inside lbmk.
+Run the script inside lbmk.
 
 ```sh 
 # collect all possibilities to choose one
@@ -138,6 +138,8 @@ dd if=coreboot.rom of=coreboot-4mb.rom bs=1M skip=8
 ---
 
 ## Injecting Blobs into an Existing Rom
+
+Run the script inside lbmk.
 
 Lbmk includes a script that will automatically inject the necessary blobs into a rom file. The script can determine the board automatically if you have not changed the name, but you can also manually set the board name with the -b flag.
 
@@ -189,6 +191,8 @@ Optionally, you can use this script to modify the mac address of the rom with th
 
 ## Check that the files were inserted
 
+Run the script inside lbmk.
+
 You must ensure that the files were inserted.
 
 Some examples of how to do that in lbmk:
@@ -221,12 +225,17 @@ You’ll note the small size of the Intel ME, e.g. 84KB on sandybridge platforms
 
 ## Prepare QEMU emulator
 
+Run the script inside lbmk.
+
 ```sh 
 # buil for qemu_x86_12mb
 ./build roms qemu_x86_12mb -p grub -d corebootfb -k usqwerty
+```
 
+Run the script in host.
+
+```sh 
 qemu-system-x86_64 -bios bin/qemu_x86_12mb/grub_qemu_x86_12mb_libgfxinit_corebootfb_usqwerty_noblobs.rom
-
 ```
 
 
