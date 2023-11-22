@@ -53,6 +53,60 @@ USAGE: ./update release <switch>
 	m) mode="${OPTARG}" ;;
 	*) err "Invalid option" ;;
 ```
+
+***4. build grub***
+```sh
+elfdir="elf/grub"
+grubcfgsdir="config/grub"
+layoutdir="/boot/grub/layouts"
+
+. "${grubcfgsdir}/modules.list"
+
+```
+
+***5. build roms ***
+
+```sh
+seavgabiosrom="elf/seabios/default/libgfxinit/vgabios.bin"
+grub_background="background1280x800.png"
+grubelf="elf/grub/grub.elf"
+cfgsdir="config/coreboot"
+kmapdir="config/grub/keymap"
+
+# Disable all payloads by default.
+# target.cfg files have to specifically enable [a] payload(s)
+pv="payload_grub payload_grub_withseabios payload_seabios payload_memtest"
+pv="${pv} payload_seabios_withgrub payload_seabios_grubonly payload_uboot memtest_bin"
+v="romdir cbrom initmode displaymode cbcfg targetdir tree arch"
+v="${v} grub_timeout ubdir vendorfiles board grub_scan_disk uboot_config"
+eval "$(setvars "n" ${pv})"
+eval "$(setvars "" ${v} boards _displaymode _payload _keyboard all targets)"
+
+USAGE:	./build roms targetname
+	To build *all* boards, do this: ./build roms all
+	To list *all* boards, do this: ./build roms list
+	
+	Optional Flags:
+	-d: displaymode
+	-p: payload
+	-k: keyboard layout
+	
+	Example commands:
+		./build roms x60
+		./build roms x200_8mb x60
+		./build roms x60 -p grub -d corebootfb -k usqwerty
+	
+	possible values for 'target':
+	$(items "config/coreboot")
+	
+	Refer to the ${projectname} documentation for more information.
+```
+
+***6. build serprog***
+
+```sh
+USAGE: ./build firmware serprog <rp2040|stm32> [board]"
+```
  
 ## Original bios extraction
 
