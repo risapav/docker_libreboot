@@ -66,14 +66,17 @@ Example commands:
 
 ***3. update release***
 
-```sh
-USAGE: ./update release <switch>
+This script builds the release archives, which are then provided in a new Libreboot release. Most users do not need to look at this file at all, but it is provided under free license for curious souls.
 
-<switch>
-	d) vdir="${OPTARG}" ;;
-	m) mode="${OPTARG}" ;;
-	*) err "Invalid option" ;;
+USAGE: ./update release
+
+NOTE: if the -d option is used, you can specify a directory other than release. For example:
+
+```sh
+./update release -d /media/stuff/libreboot_release_test
 ```
+
+If -d is not passed, they will go under release/ in your lbmk repository. The script is engineered to re-initialise git if ran from a release archive. Libreboot releases after 20230625 include .gitignore in the src archive.
 
 ***4. build grub***
 
