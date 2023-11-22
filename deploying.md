@@ -18,13 +18,40 @@ Deploying.md
 ***1. vendor inject***
 
 ```sh
-	USAGE: ./vendor inject -r [rom path] -b [boardname] -m [macaddress]
-	Example: ./vendor inject -r x230_12mb.rom -b x230_12mb
+USAGE: ./vendor inject -r [rom path] -b [boardname] -m [macaddress]
+Example: ./vendor inject -r x230_12mb.rom -b x230_12mb
 
-	Adding a macadress to the gbe is optional.
-	If the [-m] parameter is left blank, the gbe will not be touched.
+Adding a macadress to the gbe is optional.
+If the [-m] parameter is left blank, the gbe will not be touched.
 
-	Type './vendor inject listboards' to get a list of valid boards
+Type './vendor inject listboards' to get a list of valid boards
+```
+***2. update trees***
+
+```sh
+USAGE: ./update trees <switch>
+
+<switch>
+	-b) : ;;
+	-u) mode="oldconfig" ;;
+	-m) mode="menuconfig" ;;
+	-c) mode="distclean" ;;
+	-x) mode="crossgcc-clean" ;;
+	-f) mode="fetch" ;;
+	-s) mode="savedefconfig" ;;
+	-l) mode="olddefconfig" ;;
+	-n) mode="nconfig" ;;
+```sh
+
+***3. update release***
+
+```sh
+USAGE: ./update release <switch>
+
+<switch>
+	d) vdir="${OPTARG}" ;;
+	m) mode="${OPTARG}" ;;
+	*) err "Invalid option" ;;
 ```
  
 ## Original bios extraction
