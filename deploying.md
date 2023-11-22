@@ -25,7 +25,7 @@ cat bottom.rom top.rom > full_backup.bin
 cat 8mb.rom 4mb.rom > full_backup.bin
 ```
 
-Inside running container, copy full_backup.bin into /home/lboot/lbmk
+Inside running container, copy full_backup.bin into /home/sdk/lbmk
 
 ```sh 
 # for x220_8mb
