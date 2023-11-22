@@ -343,6 +343,7 @@ You’ll note the small size of the Intel ME, e.g. 84KB on sandybridge platforms
 ---
 
 ## Prepare QEMU emulator
+https://qemu-project.gitlab.io/qemu/system/devices/usb.html
 
 Run the script inside lbmk.
 
