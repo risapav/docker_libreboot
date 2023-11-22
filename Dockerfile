@@ -52,6 +52,7 @@ USER ${USERNAME}
 #ENV SHELL=/bin/bash
 # Change workdir
 WORKDIR ${CB_PATH}/lbmk
+VOLUME ${CB_PATH}/lbmk/config
 
 #RUN ./update trees -b coreboot utils && \
 #	./update trees -b seabios && \
