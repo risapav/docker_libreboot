@@ -26,6 +26,7 @@ If the [-m] parameter is left blank, the gbe will not be touched.
 
 Type './vendor inject listboards' to get a list of valid boards
 ```
+
 ***2. update trees***
 
 ```sh
@@ -55,6 +56,7 @@ USAGE: ./update release <switch>
 ```
 
 ***4. build grub***
+
 ```sh
 elfdir="elf/grub"
 grubcfgsdir="config/grub"
@@ -64,7 +66,7 @@ layoutdir="/boot/grub/layouts"
 
 ```
 
-***5. build roms ***
+***5. build roms***
 
 ```sh
 seavgabiosrom="elf/seabios/default/libgfxinit/vgabios.bin"
