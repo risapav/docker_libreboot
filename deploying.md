@@ -41,7 +41,7 @@ USAGE: ./update trees <switch>
 	-s) mode="savedefconfig" ;;
 	-l) mode="olddefconfig" ;;
 	-n) mode="nconfig" ;;
-```sh
+```
 
 ***3. update release***
 
