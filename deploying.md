@@ -29,7 +29,6 @@ Type './vendor inject listboards' to get a list of valid boards
 
 ***2. update trees***
 
-```sh
 Special operation: for building coreboot utilities cbfstool and ifdtool to go under cbutils/, do this:
 
 ./update trees -b coreboot utils
@@ -43,16 +42,15 @@ USAGE: ./update trees FLAG projectname
 
 FLAG
 
--b builds an image for the target, based on defconfig for multi-tree projects, or based only on a Makefile for single-tree projects; on some single-tree projects, this script also handles cmake.
--u runs make oldconfig on the target’s corresponding source tree, using its defconfig (useful for automatically updating configs, when updating trees like when adding patches or switching git revisions)
--m runs make menuconfig on the target’s corresponding source tree, using its defconfig (useful for modifying configs, e.g. changing CBFS size on a coreboot image)
--c tries make distclean, deferring to make clean under fault conditions and from that, non-zero exit under fault conditions. This is done on the target’s corresponding source tree.
--x tries ’make crossgcc-clean`. This only works on coreboot trees, but no error status will be returned on exit if you try it on other project trees; no action will be performed.
--f downloads the Git repository for the given project, and resets to a revision as defined under config/git/, or (for multi-tree projects), the file config/PROJECT/TREE/target.cfg to create src/project/treename.
-As for *projectname", this can either be coreboot, u-boot or seabios.
+- -b builds an image for the target, based on defconfig for multi-tree projects, or based only on a Makefile for single-tree projects; on some single-tree projects, this script also handles cmake.
+- -u runs make oldconfig on the target’s corresponding source tree, using its defconfig (useful for automatically updating configs, when updating trees like when adding patches or switching git revisions)
+- -m runs make menuconfig on the target’s corresponding source tree, using its defconfig (useful for modifying configs, e.g. changing CBFS size on a coreboot image)
+- -c tries make distclean, deferring to make clean under fault conditions and from that, non-zero exit under fault conditions. This is done on the target’s corresponding source tree.
+- -x tries ’make crossgcc-clean`. This only works on coreboot trees, but no error status will be returned on exit if you try it on other project trees; no action will be performed.
+- -f downloads the Git repository for the given project, and resets to a revision as defined under config/git/, or (for multi-tree projects), the file config/PROJECT/TREE/target.cfg to create src/project/treename.
 
 Example commands:
-
+```sh
 ./update trees -b coreboot
 ./update trees -b coreboot x200_8mb
 ./update trees -b coreboot x230_12mb x220_8mb t1650_12mb
