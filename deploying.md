@@ -4,6 +4,7 @@ Deploying.md
 ---
 # Contents
 
+- [Framework Scripts](#framework-scripts)
 - [Original bios extraction](#original-bios-extraction)
 - [Splitting The rom](#splitting-the-rom)
 - [Thinkpad X220 FullHD mod with LVDS](#thinkpad-x220-fullhd-mod-with-lvds)
@@ -12,6 +13,20 @@ Deploying.md
 - [Check that the files were inserted](#check-that-the-files-were-inserted)
 - [Prepare QEMU emulator](#prepare-qemu-emulator)
 ---
+## Framework Scripts
+
+***1. vendor inject***
+
+```sh
+	USAGE: ./vendor inject -r [rom path] -b [boardname] -m [macaddress]
+	Example: ./vendor inject -r x230_12mb.rom -b x230_12mb
+
+	Adding a macadress to the gbe is optional.
+	If the [-m] parameter is left blank, the gbe will not be touched.
+
+	Type './vendor inject listboards' to get a list of valid boards
+```
+ 
 ## Original bios extraction
 
 For example, you can read both bios part from x230 motherboard. You will obtain bootom.rom and top.rom files. In general, the 4mb image is the top, and the 8mb image is the bottom. To create a readable rom file, simply concatenate the two files.
