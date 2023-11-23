@@ -56,9 +56,11 @@ docker run \
   -v $PWD/tmp:/home/sdk/lbmk/tmp \
   -v $PWD/src:/home/sdk/lbmk/src \
   -v $PWD/bin:/home/sdk/lbmk/bin \
-  --mount type=bind,source="$(pwd)"/cfg,target=/home/sdk/lbmk/config \
+  -v $PWD/cfg:/home/sdk/lbmk/cfg \
+  -v $PWD/resource:/home/sdk/lbmk/resource \
   libreboot-sdk
 # -v $PWD/config:/home/sdk/lbmk/config \
+# --mount type=bind,source="$(pwd)"/cfg,target=/home/sdk/lbmk/config \
 ```
 
 Libreboot’s build system named lbmk is accessible within docker container. How to work with lbmk is described
