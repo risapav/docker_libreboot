@@ -62,6 +62,16 @@ docker run \
   -v $PWD/util:/home/sdk/lbmk/util \
   -v $PWD/resource:/home/sdk/lbmk/resource \
   libreboot-sdk
+
+docker run \
+  --rm \
+  -it \
+  --user "$(id -u):$(id -g)" \
+  --entrypoint /bin/bash \
+  -v $PWD/project:/project \
+  -v $PWD/lbmk:/home/sdk/lbmk \
+  libreboot-sdk
+
 # -v $PWD/config:/home/sdk/lbmk/config \
 # --mount type=bind,source="$(pwd)"/cfg,target=/home/sdk/lbmk/config \
 ```
