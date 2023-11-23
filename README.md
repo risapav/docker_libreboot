@@ -53,14 +53,15 @@ docker run \
   --user "$(id -u):$(id -g)" \
   --entrypoint /bin/bash \
   -v $PWD/project:/project \
-  -v $PWD/tmp:/home/sdk/lbmk/tmp \
-  -v $PWD/src:/home/sdk/lbmk/src \
-  -v $PWD/bin:/home/sdk/lbmk/bin \
-  -v $PWD/config:/home/sdk/lbmk/config \
-  -v $PWD/include:/home/sdk/lbmk/include \
-  -v $PWD/script:/home/sdk/lbmk/script \
-  -v $PWD/util:/home/sdk/lbmk/util \
-  -v $PWD/resource:/home/sdk/lbmk/resource \
+  -v $PWD/lbmk/tmp:/home/sdk/lbmk/tmp \
+  -v $PWD/lbmk/src:/home/sdk/lbmk/src \
+  -v $PWD/lbmk/bin:/home/sdk/lbmk/bin \
+  -v $PWD/lbmk/elf:/home/sdk/lbmk/elf \
+  -v $PWD/lbmk/resource:/home/sdk/lbmk/resource \
+  -v $PWD/lbmk/config:/home/sdk/lbmk/config \
+  -v $PWD/lbmk/include:/home/sdk/lbmk/include \
+  -v $PWD/lbmk/script:/home/sdk/lbmk/script \
+  -v $PWD/lbmk/util:/home/sdk/lbmk/util \
   libreboot-sdk
 
 docker run \
