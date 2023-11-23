@@ -25,8 +25,9 @@ USER ${USERNAME}
 
 # clone libreboot base and prepare dependencies	
 RUN cd ${CB_PATH} && \
+  git config --global user.name  ${GITUSER} && \
+  git config --global user.email  ${GITEMAIL} && \
   git clone https://codeberg.org/libreboot/lbmk.git
-  
   
 USER root  
   
