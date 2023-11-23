@@ -56,7 +56,10 @@ docker run \
   -v $PWD/tmp:/home/sdk/lbmk/tmp \
   -v $PWD/src:/home/sdk/lbmk/src \
   -v $PWD/bin:/home/sdk/lbmk/bin \
-  -v $PWD/cfg:/home/sdk/lbmk/cfg \
+  -v $PWD/config:/home/sdk/lbmk/config \
+  -v $PWD/include:/home/sdk/lbmk/include \
+  -v $PWD/script:/home/sdk/lbmk/script \
+  -v $PWD/util:/home/sdk/lbmk/util \
   -v $PWD/resource:/home/sdk/lbmk/resource \
   libreboot-sdk
 # -v $PWD/config:/home/sdk/lbmk/config \
