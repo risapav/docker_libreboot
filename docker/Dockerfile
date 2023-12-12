@@ -1,9 +1,12 @@
 FROM debian:stable-slim
 
+ARG SCRIPTS=/opt/src/scripts
+#ENV SCRIPTS=${SCRIPTS}
+
 #
 # increase the version to force recompilation of everything
 #
-ENV BUILDROOT_MIPS4KC 0.8.5
+ENV BUILDROOT_LIBREBOOT 0.0.1
 #
 # ------------------------------------------------------------------
 # environment variables to avoid that dpkg-reconfigure 
@@ -36,11 +39,15 @@ RUN sed -i "s/^# en_US.UTF-8/en_US.UTF-8/" /etc/locale.gen && locale-gen && upda
 #
 # prepare startup files in /opt/src/scripts
 #
-ARG SCRIPTS=/opt/src/scripts
 
 RUN mkdir -p ${SCRIPTS}
-COPY *.sh ${SCRIPTS}/
-RUN chmod a+x ${SCRIPTS}/*.sh
 
-ENTRYPOINT ["${SCRIPTS}/startup.sh"]
-CMD ["${SCRIPTS}/entry.sh"]
+#WORKDIR ${SCRIPTS}
+	
+ADD ./*.sh ${SCRIPTS}/
+
+#ENTRYPOINT ["/opt/src/scripts/startup.sh"]
+#CMD ["/opt/src/scripts/entry.sh"]
+
+#ENTRYPOINT ["$SCRIPTS/startup.sh"]
+#CMD ["$SCRIPTS/entry.sh"]
