@@ -17,11 +17,9 @@ ENV DEBCONF_NONINTERACTIVE_SEEN true
 RUN apt-get update
 
 RUN apt-get install -y --no-install-recommends \
-#    bash \
 	ca-certificates \
 	git \
 	locales
-
 
 # ------------------------------------------------------------------
 # prepare SDK
@@ -36,11 +34,13 @@ RUN sed -i "s/^# en_US.UTF-8/en_US.UTF-8/" /etc/locale.gen && locale-gen && upda
 
 # ------------------------------------------------------------------
 #
-# prepare startup files in /src/misc
+# prepare startup files in /opt/src/scripts
 #
-RUN mkdir -p /src/misc
-COPY *.sh /src/misc/
-RUN chmod a+x /src/misc/*.sh
+ARG SCRIPTS=/opt/src/scripts
 
-ENTRYPOINT ["/src/misc/startup.sh"]
-CMD ["/src/misc/entry.sh"]
+RUN mkdir -p ${SCRIPTS}
+COPY *.sh ${SCRIPTS}/
+RUN chmod a+x ${SCRIPTS}/*.sh
+
+ENTRYPOINT ["${SCRIPTS}/startup.sh"]
+CMD ["${SCRIPTS}/entry.sh"]
