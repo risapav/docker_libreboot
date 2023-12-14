@@ -23,4 +23,4 @@ docker run      -h LBMK_HOST                      \
                 -e GSHELL=$SHELL                  \
                 -e GRUNXTERM=$GRUNXTERM           \
                 -e GPWD=$GPWD                     \
-                -it risapav/libreboot_sdk
+                -it risapav/libreboot_sdk /bin/bash
