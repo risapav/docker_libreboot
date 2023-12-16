@@ -1,3 +1,19 @@
+inside host:
+git clone https://github.com/risapav/docker_libreboot.git
+cd docker_libreboot
+./dockbuild.sh
+./dockrun.sh
+
+
+inside docker:
+cd lbmk
+./build roms x220_8mb
+
+
+
+
+
+
 #install neccessary utilities
 sudo ./build dependencies debian
 
